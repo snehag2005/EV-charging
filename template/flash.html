@@ -1,0 +1,9 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if there is a message to display
+        {% if alert_message %}
+            // Show an alert popup
+            alert('{{ alert_message }}');
+        {% endif %}
+    });
+</script>

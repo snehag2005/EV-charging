@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Bill</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <style>
+        table,
+        tr {
+            border: 1px solid blue;
+        }
+        button{
+            margin-right: auto;
+            margin-left: auto;
+        }
+    
+        #contenttable th,
+        #contenttable td {
+            border: 1px solid blue;
+        }
+    
+        #contenttable tr:first-child {
+            background-color: lightblue;
+            color: blue;
+        }
+    
+        .sign {
+            border: none;
+        }
+    </style>
+    
+    <div class="container p-5" id="invoice">
+        <table class="table-responsive" width="100%" cellpadding="5" cellspacing="0">
+            <tr style="background-color:lightblue;color:blue;">
+                <td align="left" style="font-size:18px"><b>Invoice</b></td>
+                <td align="right"><img src="../static/img/aklogo.png" height="50px" width="200px" /></td>
+            </tr>
+            <tr>
+                <td >
+                    <table class="table-responsive" width="100%" cellpadding="5">
+                        <tr>
+                            <td width="33.3%">
+                                <b>From,</b><br />
+                                <br>
+                                <b>Name :{{bill_details[5]}}</b><br />
+                                <b>Billing Address :{{bill_details[8]}},{{bill_details[9]}}</b> <br><br><br />
+                                <b>Email :{{bill_details[6]}}</b>
+                                <b>Phone : {{bill_details[7]}}</b><br />
+                            </td>
+                            <td width="33.3%">
+                                To,<br />
+                                <br>
+                                <b>Name :{{bill_details[0]}}</b> <br />
+                                <b>Billing Address :{{bill_details[3]}},{{bill_details[4]}}</b> <br />
+                                <b>Email :{{bill_details[1]}}</b><br>
+                                <b>Phone : {{bill_details[2]}}</b><br>
+                            </td>
+                            <td width="33.3%">
+                                Date : {{bill_details[18]}}<br />
+                                Time Duration:{{bill_details[15]}}<br />
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table width="100%"  border="1" cellpadding="5" cellspacing="0" id="contenttable">
+                        <tr>
+                            <th align="left">Port</th>
+                            <th align="left">Charger Type</th>
+                            <th align="left">Connector</th>
+                            <th align="left">Actual Amt.</th>
+                        </tr>
+                        <tr>
+                            <td>{{bill_details[10]}}</td>
+                            <td>{{bill_details[11]}}</td>
+                            <td>{{bill_details[12]}}</td>
+                            <td>{{bill_details[16]}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <br />
+            <table width="100%" cellpadding="5">
+                <tr>
+                    <td width="65%">
+                        <b>Terms and Conditions:</b>
+                        <br />
+                        Your terms and conditions go here. You can add any specific details relevant to your business
+                        and
+                        transactions.
+                        <br /><br /><br /><br />
+                    </td>
+                    <td width="35%">
+                        <img src="../static/img/stamp.png" alt="" height="120px" width="120px"><br />
+                    </td>
+                </tr>
+            </table>
+        </table>
+        
+       
+    </div>
+
+   <div class="container d-flex justify-content-center mb-5">
+    <button type="button" class="btn btn-primary" onclick="downloadPDF()">Download PDF</button>
+    
+   </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('invoice'); // Choose the element that you want to print as PDF
+            const opt = {
+                margin:       1,
+                filename:     'invoice.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            // Use html2pdf library to generate PDF
+            html2pdf().from(element).set(opt).save();
+            setInterval(function () {
+                window.location.href = "{{ url_for('my_bookings', usertype=usertype, email=email, name=name) }}";
+              }, 3000);
+        }
+        
+           
+            
+        
+    </script>
+
+{% include 'footer.html' %}
+</body>
+</html>

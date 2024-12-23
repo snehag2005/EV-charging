@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .booked{
+            background-color: red;
+        }
+
+        .time-slot {
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .time-slot.selected {
+            background-color: rgb(43, 0, 255);
+            color: white;
+        }
+
+        .time-slot.booked {
+            background-color: red;
+        }
+    </style>
+     <style>
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .time-slot {
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .time-slot.selected {
+            background-color: rgb(43, 0, 255);
+            color: white;
+        }
+
+        .seat {
+            width: 50px;
+            height: 30px;
+            margin: 5px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .reserved {
+            background-color: red;
+            color: white;
+        }
+        label{
+            font-size: large;
+            font-weight: 400;
+        
+        }
+        .form-label{
+            color: black;
+            font-weight: bold;
+        }
+        .container1 {
+      border: 2px solid #ccc;
+      padding: 20px;
+      margin: 10px;
+      cursor: pointer;
+      width: 10%;
+    }
+    .container1.selected {
+      border-color: blue;
+    }
+    </style>
+
+</head>
+<body>
+    <script>
+        
+        var selectedTimeSlots = [];
+            var selectedRange = 'N/A';
+            var connectorTypePrice = 0;
+            var totalMinutes = 0; // Declare totalMinutes globally
+    
+            function calculateTotalTime(startTime, endTime) {
+                document.getElementById('bookings').style.display="block";
+                var startParts = startTime.split(':');
+                var startMinutes = parseInt(startParts[0]) * 60 + parseInt(startParts[1]);
+                
+
+                var endParts = endTime.split(':');
+                var endMinutes = parseInt(endParts[0]) * 60 + parseInt(endParts[1]);
+                
+
+                totalMinutes = endMinutes - startMinutes; // Update the global variable
+    
+                var hours = Math.floor(totalMinutes / 60);
+                var minutes = totalMinutes % 60;
+                
+                var total_min = (hours*60)+minutes;
+
+                var selectedChargeLevel = document.querySelector('input[name="charge_level"]:checked').value;
+                var totalcost = 0
+                if (selectedChargeLevel == "Level 1"){
+                    totalcost = total_min * 1;
+                }
+                else if(selectedChargeLevel == "Level 2"){
+                    totalcost = total_min * 2;
+                }
+                else{
+                    totalcost = total_min * 3;
+                }
+
+
+
+                
+                document.getElementById("totalCost").innerHTML = totalcost + '  INR';
+                document.getElementById('total_cost').value=totalcost;
+                document.getElementById('totalHours').innerText = 'Total Hours: ' + hours + ' hours ' + minutes + ' minutes';
+    
+                return hours + ' hours ' + minutes + ' minutes';
+            }
+    
+            function toggleTimeSlot(element) {
+                var timeSlot = element.getAttribute('data-time');
+    
+                if (selectedTimeSlots.length === 0) {
+                    selectedTimeSlots.push(timeSlot);
+                    connectorTypePrice = parseFloat(element.getAttribute('data-price'));
+                    $(element).addClass('selected');
+                } else if (selectedTimeSlots.length === 1) {
+                    var startSlot = selectedTimeSlots[0];
+                    var endSlot = timeSlot;
+    
+                    $('.time-slot').removeClass('selected');
+    
+                    var startIndex = $('#timeSlots .time-slot[data-time="' + startSlot + '"]').index();
+                    var endIndex = $('#timeSlots .time-slot[data-time="' + endSlot + '"]').index();
+    
+                    for (var i = startIndex; i <= endIndex; i++) {
+                        $('#timeSlots .time-slot').eq(i).addClass('selected');
+                    }
+    
+                    selectedTimeSlots.push(timeSlot);
+                } else {
+                    selectedTimeSlots = [];
+                    $('.time-slot').removeClass('selected');
+                }
+    
+                calculateTotalHours();
+            }
+    
+            function calculateTotalHours() {
+                if (selectedTimeSlots.length > 0) {
+                    var startRange = selectedTimeSlots[0].split(' - ')[0];
+                    var endRange = selectedTimeSlots[selectedTimeSlots.length - 1].split(' - ')[1];
+                    
+                    var start = selectedTimeSlots[0]
+                    var end   = selectedTimeSlots[selectedTimeSlots.length - 1]
+                    document.getElementById('start_time').value= start;
+                    document.getElementById('end_time').value= end;
+                    selectedRange = startRange + ' - ' + endRange;
+                } else {
+                    selectedRange = 'N/A';
+                }
+                document.getElementById('selectedRange').innerText = 'Selected Range: ' + selectedRange;
+    
+                var timeParts = selectedRange.split(' - ');
+                var startTime = timeParts[0].trim();
+                var endTime = timeParts[1].trim();
+    
+                var totalTime = calculateTotalTime(startTime, endTime);
+                document.getElementById('totalTime').value=totalTime;
+    
+                
+            }
+    </script>
+                
+    <!-- <div class="time-slots">
+        {% for time_slot in time_slots %}
+            {% if time_slot in booked %}
+                <div class="time-slot booked" data-time="{{ time_slot }}" onclick="toggleTimeSlot(this)">
+                    {{ time_slot }}
+                </div>
+            {% else %}
+                <div class="time-slot" data-time="{{ time_slot }}" onclick="toggleTimeSlot(this)">
+                    {{ time_slot }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div> -->
+     <div class="container mt-5 mb-5">
+            <h2>Time Slot Selection</h2>
+            <div id="timeSlots" class="d-flex flex-wrap">
+
+                
+                    {% for time_slot in time_slots %}
+                        <div class="time-slot" data-time="{{ time_slot }}" onclick="toggleTimeSlot(this)">
+                            {{ time_slot }}
+                        </div>
+                    {% endfor %}
+                
+            </div>
+        </div>
+</body>
+</html>

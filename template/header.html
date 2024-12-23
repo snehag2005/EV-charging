@@ -1,0 +1,85 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<nav class="navbar navbar-light">
+    <a class="navbar-brand" href="#">
+        <img class="logo" src="{{ url_for('static', filename='img/aklogo.png') }}" alt="Logo">
+    </a>
+    <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+    <div id="userOptions" style="float: right; ">
+        <ul class="navbar-nav me-0 flex-row justify-content-end me-4">
+            
+           
+            <li class="nav-item">
+                <div id="userOptionsDropdown">
+                    <button class="btn text-light dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if name %} {{ name }} {% else %} Login {% endif %}
+                    </button>
+                    {% if name %} 
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        
+                        <a class="dropdown-item" href="/">Home</a>
+                        <a class="dropdown-item" href="/edit_profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="/my_bookings.html">My Bookings</a>
+                        <a class="dropdown-item" href="/cancelled_bookings.html">Cancelled Bookings</a>
+                        <a class="dropdown-item" href="/login_dashboard.html" onclick="logout()">Logout</a>
+                        
+                    </div>
+                    {% else %}  
+                    
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="/dashboard.html">Login</a>
+                    </div>
+                    
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var userOptionsDiv = document.getElementById('userOptions');
+    
+            // Show the user options div when clicking on the user dropdown button
+            document.getElementById('userDropdown').addEventListener('click', function () {
+                userOptionsDiv.style.display = 'flex';
+            });
+    
+        });
+    
+        function logout() {
+            console.log('Logout function called');
+            // Display a confirmation dialog
+            var confirmLogout = confirm("Do you really want to logout?");
+    
+            // Check if the user confirmed the logout
+            if (confirmLogout) {
+                // Proceed with the logout
+                $.ajax({
+                    type: 'POST',
+                    url: '/logout',  // Update this URL to the appropriate route in your Flask app
+                    success: function(response) {
+                        // Handle the success response, if needed
+                        window.location.href = 'login_dashboard.html'; // Replace with your actual success handling
+                    },
+                    error: function(error) {
+                        // Handle the error, if needed
+                        alert('Error logging out');  // Replace with your actual error handling
+                    }
+                });
+            }
+        }
+    </script>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+    
+</nav>
+
+
+

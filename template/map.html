@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div {
+  width: 300px;
+  height: 100px;
+  background-color: yellow;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+#myDiv1 {
+  transform: rotateX(150deg);
+}
+#myDiv2 {
+  transform: rotateY(150deg);
+}
+#myDiv3:hover {
+  transform: rotateZ(150deg);
+  transition: 2s;
+}
+</style>
+</head>
+<body>
+
+<h1>The rotateZ() Method</h1>
+
+<p>The rotateZ() method rotates an element around its Z-axis at a given degree.</p>
+
+<div>
+This a normal div element.
+</div>
+
+<div id="myDiv1">
+This div element is rotated 90 degrees.
+</div>
+
+<div id="myDiv2">
+This div element is rotated 90 degrees.
+</div>
+
+<div id="myDiv3">
+This div element is rotated 90 degrees.
+</div>
+
+</body>
+</html>

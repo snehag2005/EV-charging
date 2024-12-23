@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaint Chat</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=HPbIEqrGaQgGuPrEqQG6cLjX4rvalvPHN1jrCWoaJrY1Vts4q_MYxQVrLZgYHU2uP9ktY_6ELNfxqfCVW2QbmGs9PwbAfB5tZ-rsDX4fm4bSHaO5-_re_k-KiygFn3wAl9uIXRO5HwSM2pigpijOuyz9SJr9cGvNithsfsYVHxPREuuupqn0H3GHcVmrU678QAusHFSJBAEejQX6tyQ4a-OhmajlFx-UZ1u64iMiO-K3QjbCXsu83WC02Fw0IZnfKEHz8WG0xlx4ZZuVSkG_kScGhP2-U-o-9M8uRpyh-Zze0nw77sZdO9GyspFdkuB34uGrxfAXhlais70zkZFCT0VYcqcb5nMwMGE-EF1mZdBFkw_uQWtAJypZisas9VqH01QFQCm__wp84a7CvLBydsjUpfknEk6DX0PIN-Lhb1X43nn7YnEfBGnMwPG8FVP7UgdB2aH1kJvbNzeRM0NOhK0LvBUkGePDjIajazJlDeRklJKhzilbSoCSfH68PE9s5Ig2acxleeF2a8V9zsxduD-mreVZEzghbSH1nQvhUXOmvYhAOJq1pvicIdsDkqJLtPqotQyb14tc2imHv40R-FsQE3qBO4S_BMPaWwv5ac2hIxCaARfwkTWBBTJgI_RDdh94A2YKi_ZxgErT9ZEPFfaL-0LLh1kktOXHY0dCK7OkjP22OJgBZaoRYXarWROpebo677hiDjhZjCpk62eR5-2U2MwIr6HZ0vB1Amo9u9ZZP4dAJJkrYVzqWy02t_522FJa4f62PK0EpKalVKAhp9tLcaB52yVJCZVnW1w245VS5P0--PeMrZ-9dNoxzq-vypZqZITqqh2YJ47vS7_nGxa4NdHk8Ifa9TPGqhYVA6Et5OZjEZgCefuy1GUW4RgWP85Z-ldor2bda8mzqSh1FlurV4FNNvD6_FXuCfq2A89uoY1OqKPo6eDeHGF941yZk0X2yOCsPb_LAhA1avWlvc_IFj3k29m6gJwW-LqHqKPXB6hijhMRE9mBnUEwHd245z4pNVu0hBDlJURv8qQE17QKdecaFB7f87nEgYgDBBPlRt4tQhmZbmsBAdJMBQ-zc526AMbPbvyq6rh0WFslAuA0XXWU_lHDesQ1jGhPDh-e-Bd2Z-JA0PejgCfjgT86Slf2KDgSleuHhGjR-ownP492sWkAtSbK9OzdbW4Eu0AQtQcKsWqqKSVqkq91qNwHP2E-EvtI3ky5zowjJrTVfk5iCY9qkoHl6nwJ7HIYL8v_udgWZJDgnRC4FJ3-V5yo1UtIvG353Gpfr2uM8_FLck9EXt0p3IHtwVw2GUvEAgdxcFT5eW4pjdZQI1RyyU2purVnYVQ8qV071wianiKBJ4Mt6bLKfJZ8GXzYuyZ5_euOfROaImtX15A5OaRSgaWydkVa4fPRrjMVGsL-oE2_c19loxmejmvRB25NZZm0QaZIDKBBWZhJEzy0qCr0O7Pe-bVwte2fkqUz6HLStlvqeCpRNIZfXv5NMcm_ZUGXanIVByDcGwpkDmL-4bAs1fCG3FmgyWHdWg_njWfILmx613wl4AYUziUHc3rtJbqySAPxOH93ZeGHLTPyQy13jr6B1wjpD0tan7QRxmz777wX5v97hAhsojiLPQ7OkOb9QLfQF2-TR6mEaxHBiQ53Bt_vYLgVG1Hf8ELzbSm8v52Ohw" nonce="b53af11828020568090c9e0337d20b1a" charset="UTF-8"></script>
+    
+  <style>
+    .chat-container {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .chat-container .chat-header {
+      background-color: #2b2b2b;
+      color: #fff;
+      padding: 10px;
+    }
+    .chat-container .chat-body {
+      height: 100%;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .chat-container .message {
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    {% if messages %}
+        
+            <div class="alert alert-primary ">
+                {{ messages }}
+            </div>
+        
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-primary alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+  <!-- Complaint Chat Interface -->
+  <div class="container mb-3">
+    <div class="chat-container">
+      <div class="chat-header">
+        <h4 class="mb-0">All Complaints</h4>
+      </div>
+      <div class="chat-body">
+        <!-- Sample complaint message, dynamically generated using backend data -->
+        {% for complaint in complaints_datas %}
+            <div class="message">
+                <p class="mb-1"><strong>{{complaint[2]}}: </strong>{{complaint[0]}}</p>
+                <small>{{complaint[1]}}</small><br>
+                <small>{{complaint[3]}}</small>
+            </div>
+        {% endfor %}
+
+        <!-- End of sample complaint message -->
+      </div>
+      <div class="chat-footer">
+        <form method="post">
+          <div class="input-group mb-0 p-2">
+            <input type="text" class="form-control" name="desc" id="complaintMessage" placeholder="Type your complaint here..." required>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+  
+
+
+</body>
+</html>

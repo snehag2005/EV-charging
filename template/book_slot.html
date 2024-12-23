@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=HPbIEqrGaQgGuPrEqQG6cLjX4rvalvPHN1jrCWoaJrY1Vts4q_MYxQVrLZgYHU2uP9ktY_6ELNfxqfCVW2QbmGs9PwbAfB5tZ-rsDX4fm4bSHaO5-_re_k-KiygFn3wAl9uIXRO5HwSM2pigpijOuyz9SJr9cGvNithsfsYVHxPREuuupqn0H3GHcVmrU678QAusHFSJBAEejQX6tyQ4a-OhmajlFx-UZ1u64iMiO-K3QjbCXsu83WC02Fw0IZnfKEHz8WG0xlx4ZZuVSkG_kScGhP2-U-o-9M8uRpyh-Zze0nw77sZdO9GyspFdkuB34uGrxfAXhlais70zkZFCT0VYcqcb5nMwMGE-EF1mZdBFkw_uQWtAJypZisas9VqH01QFQCm__wp84a7CvLBydsjUpfknEk6DX0PIN-Lhb1X43nn7YnEfBGnMwPG8FVP7UgdB2aH1kJvbNzeRM0NOhK0LvBUkGePDjIajazJlDeRklJKhzilbSoCSfH68PE9s5Ig2acxleeF2a8V9zsxduD-mreVZEzghbSH1nQvhUXOmvYhAOJq1pvicIdsDkqJLtPqotQyb14tc2imHv40R-FsQE3qBO4S_BMPaWwv5ac2hIxCaARfwkTWBBTJgI_RDdh94A2YKi_ZxgErT9ZEPFfaL-0LLh1kktOXHY0dCK7OkjP22OJgBZaoRYXarWROpebo677hiDjhZjCpk62eR5-2U2MwIr6HZ0vB1Amo9u9ZZP4dAJJkrYVzqWy02t_522FJa4f62PK0EpKalVKAhp9tLcaB52yVJCZVnW1w245VS5P0--PeMrZ-9dNoxzq-vypZqZITqqh2YJ47vS7_nGxa4NdHk8Ifa9TPGqhYVA6Et5OZjEZgCefuy1GUW4RgWP85Z-ldor2bda8mzqSh1FlurV4FNNvD6_FXuCfq2A89uoY1OqKPo6eDeHGF941yZk0X2yOCsPb_LAhA1avWlvc_IFj3k29m6gJwW-LqHqKPXB6hijhMRE9mBnUEwHd245z4pNVu0hBDlJURv8qQE17QKdecaFB7f87nEgYgDBBPlRt4tQhmZbmsBAdJMBQ-zc526AMbPbvyq6rh0WFslAuA0XXWU_lHDesQ1jGhPDh-e-Bd2Z-JA0PejgCfjgT86Slf2KDgSleuHhGjR-ownP492sWkAtSbK9OzdbW4Eu0AQtQcKsWqqKSVqkq91qNwHP2E-EvtI3ky5zowjJrTVfk5iCY9qkoHl6nwJ7HIYL8v_udgWZJDgnRC4FJ3-V5yo1UtIvG353Gpfr2uM8_FLck9EXt0p3IHtwVw2GUvEAgdxcFT5eW4pjdZQI1RyyU2purVnYVQ8qV071wianiKBJ4Mt6bLKfJZ8GXzYuyZ5_euOfROaImtX15A5OaRSgaWydkVa4fPRrjMVGsL-oE2_c19loxmejmvRB25NZZm0QaZIDKBBWZhJEzy0qCr0O7Pe-bVwte2fkqUz6HLStlvqeCpRNIZfXv5NMcm_ZUGXanIVByDcGwpkDmL-4bAs1fCG3FmgyWHdWg_njWfILmx613wl4AYUziUHc3rtJbqySAPxOH93ZeGHLTPyQy13jr6B1wjpD0tan7QRxmz777wX5v97hAhsojiLPQ7OkOb9QLfQF2-TR6mEaxHBiQ53Bt_vYLgVG1Hf8ELzbSm8v52Ohw" nonce="b53af11828020568090c9e0337d20b1a" charset="UTF-8"></script>
+
+    <style>
+        .time-slot {
+            width: 50px;
+            height: 30px;
+            margin: 5px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        
+        label{
+            font-size: large;
+            font-weight: 400;
+        }
+        .form-label{
+            color: black;
+            font-weight: bold;
+        }
+        .time-slot {
+            width: 100px;
+            height: 30px;
+            margin: 5px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            font-size: small;
+        }
+        .available{
+            background-color: rgb(0, 136, 0);
+            color: aliceblue;
+            cursor: pointer;
+        }
+        .available:hover{
+            transform: scale(1.1);
+        }
+        .booked {
+            background-color: red;
+            color: aliceblue;
+            cursor: no-drop;
+            
+        }
+        .booked:hover {
+            background-color: red;
+            color: aliceblue;
+            cursor: no-drop;
+            animation: moye_moye 1s;
+        }
+        .selected {
+            background-color: blue;
+            color: white;
+        }
+    
+        /* Custom styles for the pop-up */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .popup-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 80%; /* Limit maximum width */
+      height: 80%; /* Limit maximum height */
+      overflow: auto; /* Enable scrolling for content overflow */
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+    @keyframes moye_moye {
+    0% {
+        transform: rotateZ(5deg);
+       
+    }
+    10%{
+        transform: rotateZ(-5deg);
+        
+    }
+    20% {
+        transform: rotateZ(5deg);
+       
+    }
+    30%{
+        transform: rotateZ(-5deg);
+        
+    }
+    40% {
+        transform: rotateZ(5deg);
+       
+    }
+    50%{
+        transform: rotateZ(-5deg);
+        
+    }
+    60% {
+        transform: rotateZ(5deg);
+       
+    }
+    70%{
+        transform: rotateZ(-5deg);
+        
+    }
+    80% {
+        transform: rotateZ(5deg);
+       
+    }
+    90%{
+        transform: rotateZ(-5deg);
+        
+    }
+    100% {
+        transform: rotateZ(5deg);
+       
+    }
+    
+}
+
+
+    /* Media queries for responsiveness */
+    @media (max-width: 768px) {
+      .popup-content {
+        max-width: 90%; /* Adjust maximum width for smaller screens */
+        max-height: 90%; /* Adjust maximum height for smaller screens */
+      }
+    }
+
+    </style>
+</head>
+<body >
+    {% include 'header.html' %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-primary alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+        <!-- Popup Container -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <iframe id="videoFrame" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+      
+    </div>
+  </div>
+  <div>
+   
+  </div>
+  <!-- <button onclick="popup();">Click me to open the popup</button> -->
+
+    <h2 class="text-center">Select the Slot(Minimum 30min) :</h2>
+    <div id="timeSlotsContainer" class="container"></div>
+    <div id="selectedSlots" style="display: none;"></div>
+
+
+
+    <div class="container">
+        <table id="bookings"  class="table table-dark table-striped table-responsive">
+            <thead>
+                    <th>Selected Port</th>
+                    <th>Selected Type</th>
+                    <th>Selected Level</th>
+                    <th>Selected Range</th>
+                    <th>Total Cost</th>
+                    <th>Total Hours</th>
+
+                
+            </thead>
+            <tbody>
+                    <td>Selected Port is {{ selectedport }}</td>
+                    <td>Selected Type is {{ selectedtype }}</td>
+                    <td>Selected level is {{ selectedlevel }}</td>
+                    <td><span id="selected_Range"></span></td>
+                    <td><span id="total_Cost"></span></td>
+                    <td><span id="total_Hours"></span></td>
+                    <td><form action="{{url_for('book_slot',company_id=company_id)}}" method="post" id="bookings">
+                        <input type="text" name="selectedport" value="{{ selectedport }}" hidden>
+                        <input type="text" name="selectedtype" value="{{ selectedtype }}" hidden>
+                        <input type="text" name="selectedlevel" value="{{ selectedlevel }}" id="level" hidden>
+                        <input type="text" name="startSlot" id="startSlot" hidden><br>
+                        <input type="text" name="endSlot" id="endSlot" hidden>
+                        <input type="text" name="totalCost" id="totalCost" hidden>
+                        <input type="text" name="totalHours" id="totalHours" hidden>
+                        <button name="submit" value="submit" type="submit" class="btn btn-danger btn-block btn-flat">Submit</button>
+                    </form>
+                    </td>
+               
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // When document is ready
+        function popup(){
+          var videoFrame = document.getElementById('videoFrame');
+          var videoSource = window.innerWidth > 500 ? "{{ url_for('static', filename='img/dvslot.mp4') }}" : "{{ url_for('static', filename='img/mvslot.mp4') }}";
+          videoFrame.src = videoSource;
+          document.getElementById('popup').style.display="block";
+        }
+        function closePopup(){
+          var videoFrame = document.getElementById('videoFrame');
+          videoFrame.src = ''; // Reset video source to stop playing
+          document.getElementById('popup').style.display="none";
+        }
+        popup();
+      </script>
+     
+    <script>
+ 
+
+        var booked_data = {{ booked_data |safe}};
+        
+        var alltime = [
+    "00:00 - 00:15",
+    "00:15 - 00:30",
+    "00:30 - 00:45",
+    "00:45 - 01:00",
+    "01:00 - 01:15",
+    "01:15 - 01:30",
+    "01:30 - 01:45",
+    "01:45 - 02:00",
+    "02:00 - 02:15",
+    "02:15 - 02:30",
+    "02:30 - 02:45",
+    "02:45 - 03:00",
+    "03:00 - 03:15",
+    "03:15 - 03:30",
+    "03:30 - 03:45",
+    "03:45 - 04:00",
+    "04:00 - 04:15",
+    "04:15 - 04:30",
+    "04:30 - 04:45",
+    "04:45 - 05:00",
+    "05:00 - 05:15",
+    "05:15 - 05:30",
+    "05:30 - 05:45",
+    "05:45 - 06:00",
+    "06:00 - 06:15",
+    "06:15 - 06:30",
+    "06:30 - 06:45",
+    "06:45 - 07:00",
+    "07:00 - 07:15",
+    "07:15 - 07:30",
+    "07:30 - 07:45",
+    "07:45 - 08:00",
+    "08:00 - 08:15",
+    "08:15 - 08:30",
+    "08:30 - 08:45",
+    "08:45 - 09:00",
+    "09:00 - 09:15",
+    "09:15 - 09:30",
+    "09:30 - 09:45",
+    "09:45 - 10:00",
+    "10:00 - 10:15",
+    "10:15 - 10:30",
+    "10:30 - 10:45",
+    "10:45 - 11:00",
+    "11:00 - 11:15",
+    "11:15 - 11:30",
+    "11:30 - 11:45",
+    "11:45 - 12:00",
+    "12:00 - 12:15",
+    "12:15 - 12:30",
+    "12:30 - 12:45",
+    "12:45 - 13:00",
+    "13:00 - 13:15",
+    "13:15 - 13:30",
+    "13:30 - 13:45",
+    "13:45 - 14:00",
+    "14:00 - 14:15",
+    "14:15 - 14:30",
+    "14:30 - 14:45",
+    "14:45 - 15:00",
+    "15:00 - 15:15",
+    "15:15 - 15:30",
+    "15:30 - 15:45",
+    "15:45 - 16:00",
+    "16:00 - 16:15",
+    "16:15 - 16:30",
+    "16:30 - 16:45",
+    "16:45 - 17:00",
+    "17:00 - 17:15",
+    "17:15 - 17:30",
+    "17:30 - 17:45",
+    "17:45 - 18:00",
+    "18:00 - 18:15",
+    "18:15 - 18:30",
+    "18:30 - 18:45",
+    "18:45 - 19:00",
+    "19:00 - 19:15",
+    "19:15 - 19:30",
+    "19:30 - 19:45",
+    "19:45 - 20:00",
+    "20:00 - 20:15",
+    "20:15 - 20:30",
+    "20:30 - 20:45",
+    "20:45 - 21:00",
+    "21:00 - 21:15",
+    "21:15 - 21:30",
+    "21:30 - 21:45",
+    "21:45 - 22:00",
+    "22:00 - 22:15",
+    "22:15 - 22:30",
+    "22:30 - 22:45",
+    "22:45 - 23:00",
+    "23:00 - 23:15",
+    "23:15 - 23:30",
+    "23:30 - 23:45",
+    "23:45 - 24:00"
+];
+
+var currentTime = new Date();
+var currentHours = currentTime.getHours();
+var currentMinutes = currentTime.getMinutes();
+
+// Calculate the current time in minutes
+var currentTotalMinutes = currentHours * 60 + currentMinutes;
+
+// Filter time slots starting from the current time
+var timeSlots = alltime.filter(function(timeSlot) {
+    var slotParts = timeSlot.split(' - ');
+    var slotStartParts = slotParts[0].split(':');
+    var slotStartMinutes = parseInt(slotStartParts[0]) * 60 + parseInt(slotStartParts[1]);
+    return slotStartMinutes >= currentTotalMinutes;
+});
+
+
+
+
+
+var selectedSlots = [];
+
+
+        function createTimeSlots() {
+            var container = document.getElementById("timeSlotsContainer");
+            container.innerHTML = ""; // Clear previous content
+
+            timeSlots.forEach(function(timeSlot) {
+                var div = document.createElement("div");
+                div.classList.add("time-slot");
+                div.textContent = timeSlot;
+                div.setAttribute("data-time", timeSlot);
+
+                var isBooked = false;
+                for (var i = 0; i < booked_data.length; i++) {
+                    var startTime = booked_data[i][0];
+                    var endTime = booked_data[i][1];
+                    if (timeSlot >= startTime && timeSlot <= endTime) {
+                        isBooked = true;
+                        break;
+                    }
+                }
+
+                if (isBooked) {
+                    div.classList.add("booked");
+                    
+                } else {
+                    div.classList.add("available");
+                }
+
+                div.addEventListener("click", function() {
+    var currentIndex = timeSlots.indexOf(timeSlot);
+    var startSlotIndex = timeSlots.indexOf(selectedSlots[0]);
+    var endSlotIndex = timeSlots.indexOf(selectedSlots[selectedSlots.length - 1]);
+    var isBooked = div.classList.contains("booked");
+
+    if ((!selectedSlots.length || (selectedSlots.length === 1 && selectedSlots[0] === timeSlot)) && !isBooked) {
+        // If no slot is selected yet or the clicked slot is already selected and not booked
+        div.classList.add("selected");
+        selectedSlots = [timeSlot];
+    } else if (selectedSlots.length === 1) {
+        // If only one slot is selected
+        if (selectedSlots[0] === timeSlot) {
+            // If the same slot is clicked again
+            div.classList.remove("selected");
+            selectedSlots = [];
+        } else {
+            // If a different slot is clicked
+            var selectedSlotIndex = timeSlots.indexOf(selectedSlots[0]);
+            if (currentIndex < selectedSlotIndex) {
+                selectedSlots = timeSlots.slice(currentIndex, selectedSlotIndex + 1);
+            } else {
+                selectedSlots = timeSlots.slice(selectedSlotIndex, currentIndex + 1);
+            }
+            updateSlotsColor(startSlotIndex, endSlotIndex, false);
+            div.classList.add("selected");
+            updateSlotsColor(currentIndex, currentIndex, true);
+        }
+    } else {
+        // If multiple slots are selected
+        updateSlotsColor(startSlotIndex, endSlotIndex, false);
+        div.classList.add("selected");
+
+        // Find the indexes of the first and last selected slots
+        var firstIndex = timeSlots.indexOf(selectedSlots[0]);
+        var lastIndex = timeSlots.indexOf(selectedSlots[selectedSlots.length - 1]);
+
+        // Include all slots between the first and last selected slots
+        selectedSlots = timeSlots.slice(Math.min(firstIndex, currentIndex), Math.max(lastIndex, currentIndex) + 1);
+
+        // Update the startSlotIndex and endSlotIndex
+        startSlotIndex = timeSlots.indexOf(selectedSlots[0]);
+        endSlotIndex = timeSlots.indexOf(selectedSlots[selectedSlots.length - 1]);
+
+        // Update the color of selected slots
+        updateSlotsColor(startSlotIndex, endSlotIndex, true);
+    }
+
+    displaySelectedSlots();
+});
+
+
+
+                container.appendChild(div);
+            });
+        }
+
+        function displaySelectedSlots() {
+            var selectedContainer = document.getElementById("selectedSlots");
+            selectedContainer.innerHTML = "";
+            if (selectedSlots.length > 0) {
+                var selectedText = document.createElement("p");
+                selectedText.textContent = "Selected Slots:";
+                selectedContainer.appendChild(selectedText);
+
+                selectedSlots.forEach(function(slot) {
+                    var slotDiv = document.createElement("div");
+                    slotDiv.textContent = slot;
+                    selectedContainer.appendChild(slotDiv);
+                });
+            }
+
+            // Update the start and end slot text boxes
+            if (selectedSlots.length >= 2) {
+                document.getElementById("startSlot").value = selectedSlots[0];
+                document.getElementById("endSlot").value = selectedSlots[selectedSlots.length - 1];
+                document.getElementById("selected_Range").innerHTML = selectedSlots[0] + " to " +selectedSlots[selectedSlots.length - 1];
+                
+                var endtiming = selectedSlots[selectedSlots.length - 1].split('-');
+                
+                calculateTotalTime(selectedSlots[0], endtiming[1])
+            } else {
+                document.getElementById("startSlot").value = "";
+                document.getElementById("endSlot").value = "";
+            }
+        }
+
+        function updateSlotsColor(startIndex, endIndex, isSelected) {
+            var slots = document.querySelectorAll(".time-slot");
+            for (var i = startIndex; i <= endIndex; i++) {
+                if (isSelected) {
+                    slots[i].classList.add("selected");
+                    
+                } else {
+                    slots[i].classList.remove("selected");
+                }
+            }
+           
+        }
+
+        
+
+            function calculateTotalTime(startTime, endTime) {
+                // document.getElementById('bookings').style.display="block";
+
+                var startParts = startTime.split(':');
+                var startMinutes = parseInt(startParts[0]) * 60 + parseInt(startParts[1]);
+                
+
+                var endParts = endTime.split(':');
+                var endMinutes = parseInt(endParts[0]) * 60 + parseInt(endParts[1]);
+                
+                
+                totalMinutes = endMinutes - startMinutes; // Update the global variable
+    
+                var hours = Math.floor(totalMinutes / 60);
+                var minutes = totalMinutes % 60;
+                
+                var total_min = (hours*60)+minutes;
+
+                // Assuming electricity rate is $0.12 per kWh and charging rate is 10 kW
+                var electricityRate = 0.12; // rupees per kWh
+                var chargingRate = 20; // kW
+
+                if (document.getElementById('level').value == 'DC fast') {
+                    totalcost = (total_min * 3) + (total_min / 60 * chargingRate * electricityRate);
+                } else if (document.getElementById('level').value == 'Level 1') {
+                    totalcost = (total_min * 1) + (total_min / 60 * chargingRate * electricityRate);
+                } else {
+                    totalcost = (total_min * 2) + (total_min / 60 * chargingRate * electricityRate);
+                }
+
+                
+
+
+
+                
+                document.getElementById("totalCost").value = totalcost + '  INR';
+                document.getElementById("total_Cost").innerHTML = totalcost + '  INR';
+
+                // document.getElementById('total_cost').value=totalcost;
+                document.getElementById('totalHours').value =   hours + ' hours ' + minutes + ' minutes';
+                document.getElementById('total_Hours').innerHTML =   hours + ' hours ' + minutes + ' minutes';
+    
+                return hours + ' hours ' + minutes + ' minutes';
+            }
+
+        window.onload = createTimeSlots;
+        
+    </script>
+    <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+   
+    {% include 'footer.html' %}
+</body>
+</html>
+

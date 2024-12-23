@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+ .navbar .navbar-custom-menu ul li .icon{
+    display: none;
+  }
+
+  @media screen and (max-width:600px) {
+    .navbar .navbar-custom-menu ul li  .icon{
+    display: block;
+    float: left;
+  }
+}
+
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+  
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+.logo-lg{
+  margin-top: 3%;
+}
+
+
+</style>
+<header class="main-header">
+
+    <!-- Logo -->
+    <a href="./" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>AK</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <!-- <span class="logo-lg"><b>AKcodes </b> Management System</span> -->
+      <img src="{{ url_for('static', filename='img/aklogo.png') }}" alt="" height="60%" width="100%" class="logo-lg">
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <!-- <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a> -->
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </li>
+         <li><h5 style="color:aliceblue;margin-top: 20px;">{{name}}</h5></li>
+          <li  class="dropdown user user-menu">
+            
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs" onclick="logout()" >Logout</span>
+            </a>
+            
+          </li>
+          
+        <div class="topnav">
+          
+          <div id="myLinks">
+            <a href="update_details.html"><i class="fa fa-users"></i> <span>Update Profile</span> </a>
+            <a href="bookings_admin.html"><i class="fa  fa-history"></i> <span>Booking History</span> </a>
+            <li id="history"><a href="cancelled_bookingsadmin.html"><i class="fa  fa-history"></i> <span>Cancelled Booking History</span> </a></li>
+            <li id="company"><a href="complaints_sadmin.html"><i class="fa  fa-exclamation"></i> <span>Complaints</span> </a></li>
+            <a href="#" ><span onclick="logout()" >Logout</span></a>
+          </div>
+          
+        </div>
+          <!-- Control Sidebar Toggle Button -->
+         
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
+    <section class="sidebar">
+    </form>
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header"> Dashboard</li>
+        <li id="update"><a href="update_details.html"><i class="fa fa-users"></i> <span>Update Profile</span> </a></li>
+        <li id="history"><a href="bookings_admin.html"><i class="fa  fa-history"></i> <span>Booking History</span> </a></li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+   
+  </aside>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myLinks");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+    </script>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Supercharger</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <style>
+            @keyframes zoomIn {
+    0% {
+        transform: scale(1);
+       
+    }
+    10%{
+        transform: scale(1.2);
+        
+    }
+    20% {
+        transform: scale(1);
+       
+    }
+    30%{
+        transform: scale(1.2);
+        
+    }
+    40% {
+        transform: scale(1);
+       
+    }
+    50%{
+        transform: scale(1.2);
+        
+    }
+    60% {
+        transform: scale(1);
+       
+    }
+    70%{
+        transform: scale(1.2);
+        
+    }
+    80% {
+        transform: scale(1);
+       
+    }
+    90%{
+        transform: scale(1.2);
+        
+    }
+    100% {
+        transform: scale(1);
+       
+    }
+    
+}
+
+
+        /* Common styles for question mark and popup */
+        .question-mark {
+            display: inline-block;
+            width: 30px; /* Adjust size as needed */
+            height: 30px; /* Adjust size as needed */
+            border-radius: 50%; /* Creates a circle */
+            background-color: black; /* Circle color */
+            color: white; /* Question mark color */
+            font-size: 24px; /* Adjust font size as needed */
+            text-align: center;
+            line-height: 30px; /* Vertical centering */
+            cursor: pointer; /* Change cursor to pointer */
+            animation: zoomIn 5s infinite;
+        }
+    
+        #info {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 9999; /* Ensure it appears on top of other elements */
+            width: 80%; /* Adjust width for larger screens */
+            max-width: 800px; /* Limit maximum width for very large screens */
+            max-height: 80%; /* Limit maximum height for smaller screens */
+            overflow: auto; /* Enable scrolling if content exceeds container size */
+        }
+    
+        .btn-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10000; /* Ensure it appears above the popup */
+            color: black; /* Adjust color as needed */
+        }
+    
+        /* Media query for smaller screens */
+        @media only screen and (max-width: 768px) {
+            #info {
+                width: 90%; /* Adjust width for smaller screens */
+                max-width: none; /* Remove maximum width limit for smaller screens */
+                max-height: 90%; /* Adjust maximum height for smaller screens */
+            }
+    
+            .btn-close {
+                top: 5px; /* Adjust top position for smaller screens */
+                right: 5px; /* Adjust right position for smaller screens */
+            }
+        }
+    </style>
+    
+    
+    
+</head>
+<body>
+
+    {% include 'header.html' %}
+   
+    {% for company in registered_companies %}
+    <div class="container bg-light mb-3">
+        <div class="row mt-4"> 
+            <div class="col-lg-8 text-center">
+                <div class="row ml-0 mt-4">
+                    <h1>{{ company.name }}</h1>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col mt-2 mb-3">
+                        <h6>Address: {{ company.address }}, {{ company.area }}, {{ company.taluka }}, {{ company.state }}, India</h6>
+                    </div>
+                </div>
+
+                <div class="row mt-4 ml-1">
+                    <div class="col-lg-6 mt-2">
+                        <h6>Phone: <a href="tel:{{ company.phone }}">{{ company.phone }}</a></h6>
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                        <a target="_blank" href="https://www.google.com/maps/place/{{ company.address }},{{ company.area }},{{ company.taluka }},{{ company.state }}/data=!3m1!4b1!4m6!3m5!1s0x3be7b8fcfe76fd59:0xcf367d85f7c50283!8m2!3d19.2183307!4d72.9780897!16zL20vMDE2bXA5?entry=ttu" class="btn btn-primary">Direction</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15069.84605378637!2d72.95785605!3d19.21870805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1707145040323!5m2!1sen!2sin" allowfullscreen=""></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 text-center">
+            <div class="col">
+                <div class="row mt-1 mb-3 ml-1">
+                    <h5>Vehicle Accessibility:</h5>
+                    <h5>Accommodation of light city vehicles.</h5>
+                </div>
+                <div class="row ml-1 mt-5">
+                    <div class="col"><h2>Electric Vehicle Charging</h2><div class="question-mark" title="Click Me" onclick="openinfo()">?</div></div>
+                </div>
+                <div class="row m-1">
+                    <table class="table table-bordered table-dark table-striped table-responsive">
+                        <thead class="table-light"></thead>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>EVSE Port</th>
+                                <th>Connector</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ company.connector_types }}</td>
+                                <td>{{ company.charge_levels }}</td>
+                                <td>{% if company.dc_support == '1' %}DC Fast{% else %}No{% endif %}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="row ml-3">
+                    <div class="col col-lg-3 ml-3 mt-3">
+                        <img class="" src="{{ url_for('static', filename='img/key.jpg') }}" alt="key" height="50px" width="50px">
+                    </div>
+                    <div class="col col-lg-2 mt-4">
+                        <h6>Public</h6>
+                    </div>
+                </div>
+                <div class="row ml-4">
+                    <div class="col col-lg-3 ml-3 mt-3">
+                        <img class="" src="{{ url_for('static', filename='img/clock.jpg') }}" alt="clock" height="50px" width="50px">
+                    </div>
+                    <div class="col col-lg-3">
+                        <h6>24 hours daily: for Tesla use only</h6>
+                    </div>
+                </div>
+                <div class="row m-1">
+                    <div class="col col-lg-3 mt-3">
+                        <img class="" src="{{ url_for('static', filename='img/card.jpg') }}" alt="card" height="50px" width="50px">
+                    </div>
+                    <div class="col col-lg-6 mt-4">
+                        <h6>American Express, Discover, Debit Card, Credit, Visa</h6>
+                    </div>
+                </div>
+                <div class="row m-5">
+                    <a href="{{ url_for('book_port', company_id=company.id) }}" class="btn btn-primary">BOOK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+   <div class="container" id="info" >
+    <button type="button" class="btn-close shadow p-3 mb-5 bg-body-tertiary rounded" aria-label="Close" onclick="closeInfo()"></button>
+    
+    <h1 class="fs-3 mrg">Charging Infrastructure Terminology</h1>
+
+    <p class="text-start fs-6 font-family-Helvetica Neue h1 mrg_text-start">The Alternative Fueling Station Locator uses the following charging infrastructure definitions:</p>
+    <br>
+    <div class=" container ">
+        <ul class="list-unstyled fs-6 ">
+        
+            <ul>
+              <li class="lh-lg"> <dt class="col-sm-3">Station Location:</dt> A station location is a site with one or more EV charging ports at the same address. Examples include a parking garage or a mall parking lot.</li><br>
+              <li class="lh-lg"><dt class="col-sm-3">EV Charging Port:</dt> An EV charging port provides power to charge only one vehicle at a time even though it may have multiple connectors. The unit that houses EV charging ports is sometimes called a charging post, which can have one or more EV charging ports. EV charging ports are also sometimes referred to as electric vehicle supply equipment (EVSE) ports.</li><br>
+              <li class="lh-lg"><dt class="col-sm-3">Connector:</dt> A connector is what is plugged into a vehicle to charge it. Multiple connectors and connector types (such as CHAdeMO and CCS) can be available on one EV charging port, but only one vehicle will charge at a time. Connectors are sometimes called plugs.</li><br>
+            </ul>
+         
+        </ul>
+
+
+    </div>
+    
+    <img src="../static/img/ev.jpg" class="img-fluid " alt="image" height="100" width="100">
+
+   </div>
+       
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function openinfo() {
+            document.getElementById('info').style.display='block';
+        }
+       
+    function closeInfo() {
+        document.getElementById('info').style.display = 'none';
+    }
+    
+</script>
+
+    
+    {% include 'footer.html' %}
+    
+</body>
+</html>
